@@ -57,6 +57,7 @@ const historyItems = [
   "感染症や皮膚疾患はありません",
   "施術部位に炎症や傷はありません",
   "過去にアートメイク経験が有り",
+  "アートメイク経験なし",
   "その他、医師の確認が必要な状態はありません",
   "その他、事前事項確認いたしました",
 ];
@@ -211,6 +212,8 @@ function initCustomerPage() {
 
   function startDrawing(event) {
     if (!allRequiredChecksCompleted() || getCheckedValues("treatmentParts").length === 0 || !isTreatmentOtherValid()) return;
+    event.preventDefault();
+    canvas.setPointerCapture?.(event.pointerId);
     isDrawing = true;
     const position = getPointerPosition(event);
     ctx.beginPath();
@@ -229,8 +232,9 @@ function initCustomerPage() {
     ctx.stroke();
   }
 
-  function finishDrawing() {
+  function finishDrawing(event) {
     if (!isDrawing) return;
+    if (event?.pointerId != null) canvas.releasePointerCapture?.(event.pointerId);
     isDrawing = false;
     hasSignature = true;
     if (!signedAt) signedAt = new Date().toISOString();
@@ -303,6 +307,7 @@ function initCustomerPage() {
   canvas.addEventListener("pointermove", draw);
   canvas.addEventListener("pointerup", finishDrawing);
   canvas.addEventListener("pointerleave", finishDrawing);
+  canvas.addEventListener("pointercancel", finishDrawing);
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
