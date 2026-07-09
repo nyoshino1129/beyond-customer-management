@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4a4a4a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="BEYOND 顧客管理" />
+    <title>BEYOND 顧客管理</title>
+    <meta name="description" content="BEYOND 顧客管理システム" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="BEYOND 顧客管理" />
+    <meta property="og:description" content="BEYOND 顧客管理システム" />
+    <meta property="og:image" content="https://beyond-customer-management.vercel.app/icon.svg" />
+    <meta property="og:url" content="https://beyond-customer-management.vercel.app/" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="BEYOND 顧客管理" />
+    <meta name="twitter:description" content="BEYOND 顧客管理システム" />
+    <meta name="twitter:image" content="https://beyond-customer-management.vercel.app/icon.svg" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&family=Playfair+Display:wght@500;600;700&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css?v=home-title-nowrap-20260709" />
+  </head>
+  <body data-page="customer">
+    <header class="app-header">
+      <div class="header-title">
+        <p class="header-kicker">BEYOND 電子顧客管理</p>
+        <h1 id="headerSalonName">BEYOND</h1>
+      </div>
+      <button class="header-menu-button" id="logoutButton" type="button" hidden aria-label="ログアウト">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <main>
+      <section id="salonRegisterView" class="panel login-panel salon-auth-panel">
+        <div class="auth-brand">
+          <p class="auth-kicker">PERMANENT MAKEUP CONSENT</p>
+          <h2>BEYOND</h2>
+          <p class="auth-app-name">SALON APP</p>
+          <div class="ornament" aria-hidden="true"><span></span></div>
+        </div>
+        <div class="section-title auth-section-title">
+          <span class="auth-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" role="img">
+              <path d="M14 21v-5a10 10 0 0 1 20 0v5"></path>
+              <rect x="10" y="21" width="28" height="20" rx="4"></rect>
+              <path d="M24 29v6"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>サロン登録</h3>
+            <p>サロン専用アカウントを作成してください。</p>
+          </div>
+        </div>
+        <form id="salonRegisterForm" class="password-form">
+          <label>
+            メールアドレス
+            <input type="email" id="registerEmail" autocomplete="username" required placeholder="salon@example.com" />
+          </label>
+          <label>
+            パスワード
+            <input type="password" id="registerPassword" autocomplete="new-password" required placeholder="パスワード" />
+          </label>
+          <label>
+            パスワード確認
+            <input type="password" id="registerPasswordConfirm" autocomplete="new-password" required placeholder="もう一度入力" />
+          </label>
+          <label>
+            サロン名
+            <input type="text" id="registerSalonName" autocomplete="organization" required placeholder="BEYOND" />
+          </label>
+          <button class="primary-button" type="submit">登録</button>
+          <button class="text-link-button" id="showLoginButton" type="button">登録済みの方はこちら</button>
+          <p class="form-message" id="registerMessage" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="appLoginView" class="panel login-panel salon-auth-panel" hidden>
+        <div class="auth-brand">
+          <p class="auth-kicker">PERMANENT MAKEUP CONSENT</p>
+          <h2>BEYOND</h2>
+          <p class="auth-app-name">SALON APP</p>
+          <div class="ornament" aria-hidden="true"><span></span></div>
+        </div>
+        <div class="section-title auth-section-title">
+          <span class="auth-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" role="img">
+              <path d="M14 21v-5a10 10 0 0 1 20 0v5"></path>
+              <rect x="10" y="21" width="28" height="20" rx="4"></rect>
+              <path d="M24 29v6"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>サロン専用ログイン</h3>
+            <p>登録したメールアドレスとパスワードを入力してください</p>
+          </div>
+        </div>
+        <form id="appLoginForm" class="password-form">
+          <label>
+            メールアドレス
+            <input type="email" id="appEmail" autocomplete="username" required placeholder="salon@example.com" />
+          </label>
+          <label>
+            パスワード
+            <input type="password" id="appPassword" autocomplete="current-password" required placeholder="パスワード" />
+          </label>
+          <button class="primary-button" type="submit">ログイン</button>
+          <div class="auth-links">
+            <button class="text-link-button" id="showRegisterButton" type="button">初めての方はこちら</button>
+            <button class="text-link-button" id="forgotPasswordButton" type="button">パスワードを忘れた方</button>
+          </div>
+          <p class="form-message" id="appLoginMessage" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="passwordResetView" class="panel login-panel salon-auth-panel" hidden>
+        <div class="auth-brand">
+          <p class="auth-kicker">PERMANENT MAKEUP CONSENT</p>
+          <h2>BEYOND</h2>
+          <p class="auth-app-name">SALON APP</p>
+          <div class="ornament" aria-hidden="true"><span></span></div>
+        </div>
+        <div class="section-title auth-section-title">
+          <span class="auth-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" role="img">
+              <path d="M24 8a16 16 0 1 0 15 21"></path>
+              <path d="M39 12v12H27"></path>
+              <path d="M20 25h8"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>パスワード再設定</h3>
+            <p>デモ版ではメール送信を行わず、この端末内で再設定します。</p>
+          </div>
+        </div>
+        <form id="passwordResetForm" class="password-form">
+          <label>
+            メールアドレス
+            <input type="email" id="resetEmail" autocomplete="username" required placeholder="salon@example.com" />
+          </label>
+          <label>
+            新しいパスワード
+            <input type="password" id="resetPassword" autocomplete="new-password" required placeholder="新しいパスワード" />
+          </label>
+          <label>
+            パスワード確認
+            <input type="password" id="resetPasswordConfirm" autocomplete="new-password" required placeholder="もう一度入力" />
+          </label>
+          <button class="primary-button" type="submit">パスワードを再設定</button>
+          <div class="auth-links">
+            <button class="text-link-button" id="backToLoginButton" type="button">ログインへ戻る</button>
+          </div>
+          <p class="form-message" id="resetMessage" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="homeView" class="view">
+        <section class="panel home-panel">
+          <div class="home-menu">
+            <button class="home-menu-button primary-menu" type="button" data-open-view="formView">
+              <span class="menu-number">①</span>
+              <span class="menu-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" role="img">
+                  <path d="M17 11h14v6H17z"></path>
+                  <path d="M14 15H9v28h30V15h-5"></path>
+                  <path d="M16 25h16M16 32h16"></path>
+                </svg>
+              </span>
+              <span class="menu-content">
+                <strong>電子同意書</strong>
+                <small>お客様に同意を頂くための電子同意書を作成します。</small>
+              </span>
+              <span class="menu-arrow" aria-hidden="true">›</span>
+            </button>
+            <button class="home-menu-button" type="button" data-open-view="karteView">
+              <span class="menu-number">②</span>
+              <span class="menu-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" role="img">
+                  <path d="M6 17h14l4 5h18v20H6z"></path>
+                </svg>
+              </span>
+              <span class="menu-content">
+                <strong>電子カルテ</strong>
+                <small>お客様情報やカルテ内容を管理します。</small>
+              </span>
+              <span class="menu-arrow" aria-hidden="true">›</span>
+            </button>
+            <button class="home-menu-button" type="button" data-open-view="customersView">
+              <span class="menu-number">③</span>
+              <span class="menu-icon" aria-hidden="true">
+                <svg viewBox="0 0 48 48" role="img">
+                  <path d="M18 24a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM6 40c1-8 5-12 12-12s11 4 12 12"></path>
+                  <path d="M32 25a6 6 0 1 0 0-12M31 29c6 1 10 5 11 11"></path>
+                </svg>
+              </span>
+              <span class="menu-content">
+                <strong>顧客管理</strong>
+                <small>お客様情報の一覧を確認・管理します。</small>
+              </span>
+              <span class="menu-arrow" aria-hidden="true">›</span>
+            </button>
+          </div>
+          <p class="home-footer">© <span id="homeFooterSalonName">BEYOND</span> All Rights Reserved.</p>
+        </section>
+      </section>
+
+      <section id="karteView" class="view">
+        <button class="page-home-button" type="button" data-open-view="homeView">← ホーム</button>
+        <form id="karteForm" class="form-layout karte-form">
+          <section class="panel">
+            <div class="section-title">
+              <span>01</span>
+              <div>
+                <p class="eyebrow">Customer Record</p>
+                <h2>電子カルテ</h2>
+                <p>顧客情報</p>
+              </div>
+            </div>
+
+            <div class="grid two-columns">
+              <label>
+                顧客ID
+                <input type="text" id="karteCustomerId" name="customerId" readonly />
+              </label>
+              <label>
+                お名前
+                <input type="text" name="name" autocomplete="name" required placeholder="例：山田 花子" />
+              </label>
+              <label>
+                フリガナ
+                <input type="text" name="kana" placeholder="例：ヤマダ ハナコ" />
+              </label>
+              <label>
+                生年月日
+                <input type="date" id="karteBirthDate" name="birthDate" />
+              </label>
+              <label>
+                年齢
+                <input type="text" id="karteAge" name="age" readonly placeholder="自動計算" />
+              </label>
+              <label>
+                電話番号
+                <input type="tel" name="phone" autocomplete="tel" placeholder="例：09012345678" />
+              </label>
+              <label>
+                メールアドレス
+                <input type="email" name="email" autocomplete="email" placeholder="例：salon@example.com" />
+              </label>
+              <label class="full-field">
+                住所
+                <input type="text" name="address" autocomplete="street-address" placeholder="住所を入力" />
+              </label>
+              <label>
+                職業
+                <input type="text" name="occupation" placeholder="例：会社員" />
+              </label>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <span>02</span>
+              <div>
+                <h2>来店情報</h2>
+                <p>初回来店日や来店きっかけを記録します。</p>
+              </div>
+            </div>
+            <div class="grid two-columns">
+              <label>
+                初回来店日
+                <input type="date" name="firstVisitDate" />
+              </label>
+              <label>
+                担当者
+                <input type="text" name="staff" placeholder="担当者名" />
+              </label>
+              <label class="full-field">
+                来店きっかけ
+                <select name="visitSource">
+                  <option value="">選択してください</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="Google">Google</option>
+                  <option value="ホームページ">ホームページ</option>
+                  <option value="LINE">LINE</option>
+                  <option value="紹介">紹介</option>
+                  <option value="TikTok">TikTok</option>
+                  <option value="その他">その他</option>
+                </select>
+              </label>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <span>03</span>
+              <div>
+                <h2>備考</h2>
+                <p>自由入力欄</p>
+              </div>
+            </div>
+            <label>
+              備考
+              <textarea name="notes" rows="6" placeholder="体質、注意事項、接客メモなどを入力"></textarea>
+            </label>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <span>04</span>
+              <div>
+                <h2>施術写真</h2>
+                <p>施術部位ごとに最大5枚まで保存できます。</p>
+              </div>
+            </div>
+            <div class="karte-photo-controls">
+              <label>
+                施術部位
+                <select id="kartePhotoPart">
+                  <option value="眉">眉</option>
+                  <option value="リップ">リップ</option>
+                  <option value="アイライン">アイライン</option>
+                  <option value="ヘアライン">ヘアライン</option>
+                  <option value="SMP">SMP</option>
+                  <option value="カモフラージュ">カモフラージュ</option>
+                  <option value="除去">除去</option>
+                </select>
+              </label>
+              <label>
+                回数
+                <select id="kartePhotoRound">
+                  <option value="initial">初回</option>
+                  <option value="second">2回目</option>
+                  <option value="third">3回目</option>
+                </select>
+              </label>
+              <label>
+                何ヶ月後
+                <input type="number" id="kartePhotoMonths" min="0" step="0.5" inputmode="decimal" placeholder="例：1.5" disabled />
+              </label>
+              <label>
+                タイミング
+                <select id="kartePhotoTiming">
+                  <option value="before">施術前</option>
+                  <option value="after">施術後</option>
+                </select>
+              </label>
+              <label class="photo-upload-box karte-photo-upload">
+                写真をアップロード
+                <input type="file" id="kartePhotoInput" accept="image/*" multiple />
+              </label>
+            </div>
+            <p class="photo-limit-note" id="kartePhotoCount">保存写真：0枚</p>
+            <div id="kartePhotoList" class="karte-photo-list"></div>
+            <p class="empty-state visible-empty" id="kartePhotoEmptyState">施術写真はまだ追加されていません。</p>
+          </section>
+
+          <div class="karte-submit-bar">
+            <button class="primary-button" type="submit">保存</button>
+            <button class="secondary-button" type="button" data-open-view="homeView">ホームへ戻る</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="customersView" class="view">
+        <button class="page-home-button" type="button" data-open-view="homeView">← ホーム</button>
+        <section class="panel customers-panel">
+          <div class="section-title">
+            <span>01</span>
+            <div>
+              <p class="eyebrow">Customer List</p>
+              <h2>顧客管理</h2>
+              <p>保存された電子カルテの一覧です。</p>
+            </div>
+          </div>
+          <label class="customer-search-field">
+            検索
+            <input type="search" id="karteSearchInput" placeholder="名前・電話番号で検索" />
+          </label>
+          <div id="karteList" class="karte-list"></div>
+          <p class="empty-state" id="karteEmptyState">保存された電子カルテはまだありません。</p>
+          <div class="thanks-actions">
+            <button class="primary-button" type="button" data-open-view="karteView">電子カルテを作成</button>
+            <button class="secondary-button" type="button" data-open-view="homeView">ホームへ戻る</button>
+          </div>
+        </section>
+        <section class="panel customer-detail-panel" id="customerDetailPanel" hidden>
+          <button class="secondary-button customer-back-button" id="backToCustomerListButton" type="button">← 顧客一覧へ戻る</button>
+          <div class="section-title">
+            <span>02</span>
+            <div>
+              <p class="eyebrow" id="customerDetailId">Customer</p>
+              <h2 id="customerDetailName">顧客詳細</h2>
+              <p>顧客情報を確認・管理します。</p>
+            </div>
+          </div>
+          <div class="customer-menu-tabs" id="customerMenuTabs">
+            <button class="active" type="button" data-customer-tab="basic">基本情報</button>
+            <button type="button" data-customer-tab="consent">電子同意書</button>
+            <button type="button" data-customer-tab="karte">電子カルテ</button>
+            <button type="button" data-customer-tab="photos">施術写真</button>
+          </div>
+          <div id="customerDetailContent" class="customer-detail-content"></div>
+        </section>
+      </section>
+
+      <section id="settingsView" class="view">
+        <section class="panel coming-panel">
+          <p class="eyebrow">Settings</p>
+          <h2>設定</h2>
+          <p>Firebase接続情報は firebase-config.js で管理します。</p>
+          <a class="secondary-button admin-link-button" href="admin.html">管理画面を開く</a>
+          <button class="secondary-button" id="settingsLogoutButton" type="button">ログアウト</button>
+          <button class="secondary-button" type="button" data-open-view="homeView">戻る</button>
+        </section>
+      </section>
+
+      <section id="formView" class="view">
+        <button class="page-home-button" type="button" data-open-view="homeView">← ホーム</button>
+        <form id="consentForm" class="form-layout">
+          <section class="panel">
+            <div class="section-title">
+              <span>01</span>
+              <div>
+                <h2>お客様情報入力</h2>
+                <p>施術前に必要な基本情報を入力してください。</p>
+              </div>
+            </div>
+
+            <div class="grid two-columns">
+              <label>
+                氏名
+                <input type="text" name="name" autocomplete="name" required placeholder="例：山田 花子" />
+              </label>
+              <label>
+                フリガナ
+                <input type="text" name="kana" required placeholder="例：ヤマダ ハナコ" />
+              </label>
+              <label>
+                生年月日
+                <input type="date" name="birthDate" required />
+              </label>
+              <label>
+                施術日
+                <input type="date" name="treatmentDate" required />
+              </label>
+              <label>
+                電話番号
+                <input type="tel" name="phone" autocomplete="tel" required placeholder="例：09012345678" />
+              </label>
+            </div>
+
+            <div class="field-group">
+              <p class="field-label">施術希望部位</p>
+              <div class="choice-grid" id="treatmentChoices"></div>
+              <label class="other-treatment-field" id="otherTreatmentField" hidden>
+                その他の施術部位
+                <input
+                  type="text"
+                  name="treatmentOther"
+                  id="treatmentOther"
+                  placeholder="その他の施術部位を入力してください"
+                />
+              </label>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <span>02</span>
+              <div>
+                <h2>既往歴・事前確認事項</h2>
+                <p>該当内容を確認し、チェックしてください。</p>
+              </div>
+            </div>
+            <div class="check-list" id="historyChecks"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <span>03</span>
+              <div>
+                <h2>施術説明</h2>
+                <p>お客様へ説明する基本内容です。</p>
+              </div>
+            </div>
+            <div class="description-box">
+              <p>アートメイクは皮膚の浅い層に色素を定着させる施術です。</p>
+              <p>施術直後は色が濃く見える場合がありますが、時間の経過とともに薄くなります。</p>
+              <p>色の定着には個人差があり、肌質・代謝・生活習慣・アフターケアによって仕上がりが異なります。</p>
+              <p>1回で完成するものではなく、必要に応じてリタッチが必要になる場合があります。</p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <span>04</span>
+              <div>
+                <h2>リスク説明</h2>
+                <p>すべての項目を確認してください。</p>
+              </div>
+            </div>
+            <div class="check-list" id="riskChecks"></div>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <span>05</span>
+              <div>
+                <h2>アフターケア確認</h2>
+                <p>施術後の注意事項です。</p>
+              </div>
+            </div>
+            <div class="check-list" id="aftercareChecks"></div>
+          </section>
+
+          <section class="panel highlight-panel">
+            <div class="section-title">
+              <span>06</span>
+              <div>
+                <h2>同意チェック</h2>
+                <p>下記すべてにチェックが入ると署名できます。</p>
+              </div>
+            </div>
+            <div class="check-list" id="finalConsentChecks"></div>
+            <p class="signature-lock" id="signatureLock">すべての必須チェックが完了すると署名欄が有効になります。</p>
+          </section>
+
+          <section class="panel">
+            <div class="section-title">
+              <span>07</span>
+              <div>
+                <h2>電子署名</h2>
+                <p>指またはマウスで署名してください。</p>
+              </div>
+            </div>
+            <div class="signature-card">
+              <canvas id="signatureCanvas" width="900" height="280" aria-label="署名欄"></canvas>
+              <div class="signature-meta">
+                <span id="signatureStatus">未署名</span>
+                <span id="signedAtText">署名日時：未記録</span>
+              </div>
+              <button class="secondary-button" id="clearSignatureButton" type="button">署名をクリア</button>
+            </div>
+          </section>
+
+          <div class="submit-bar">
+            <button class="primary-button" id="submitButton" type="submit" disabled>同意書を送信する</button>
+            <button class="secondary-button" type="reset">入力内容をリセット</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="thanksView" class="view">
+        <button class="page-home-button" type="button" data-open-view="homeView">← ホーム</button>
+        <section class="panel thanks-panel">
+          <p class="eyebrow">Completed</p>
+          <h2>保存が完了しました</h2>
+          <p>入力内容は保存され、画面はクリアされました。</p>
+          <div class="thanks-actions">
+            <button class="primary-button" id="nextCustomerButton" type="button">次のお客様の入力へ</button>
+            <button class="secondary-button" type="button" data-open-view="homeView">戻る</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <dialog class="photo-preview-dialog" id="photoPreviewDialog">
+      <div class="photo-preview-shell">
+        <button class="icon-button photo-preview-close" id="photoPreviewClose" type="button" aria-label="閉じる">×</button>
+        <img id="photoPreviewImage" alt="施術写真の拡大表示" />
+        <div class="photo-preview-caption">
+          <strong id="photoPreviewTitle">施術写真</strong>
+          <span id="photoPreviewMeta"></span>
+        </div>
+      </div>
+    </dialog>
+
+    <template id="checkboxTemplate">
+      <label class="check-item">
+        <input type="checkbox" />
+        <span></span>
+      </label>
+    </template>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="firebase-service.js"></script>
+    <script src="script.js?v=beyond-brand-20260709"></script>
+  </body>
+</html>

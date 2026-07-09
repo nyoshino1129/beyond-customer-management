@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#4a4a4a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="BEYOND 顧客管理" />
+    <title>BEYOND 顧客管理</title>
+    <meta name="description" content="BEYOND 顧客管理システム" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="BEYOND 顧客管理" />
+    <meta property="og:description" content="BEYOND 顧客管理システム" />
+    <meta property="og:image" content="https://beyond-customer-management.vercel.app/icon.svg" />
+    <meta property="og:url" content="https://beyond-customer-management.vercel.app/admin.html" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="BEYOND 顧客管理" />
+    <meta name="twitter:description" content="BEYOND 顧客管理システム" />
+    <meta name="twitter:image" content="https://beyond-customer-management.vercel.app/icon.svg" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Zen+Maru+Gothic:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css?v=home-title-nowrap-20260709" />
+  </head>
+  <body data-page="admin">
+    <header class="app-header">
+      <div class="header-title">
+        <p class="header-kicker">PERMANENT MAKEUP CONSENT</p>
+        <h1>BEYOND</h1>
+      </div>
+    </header>
+
+    <main>
+      <section id="loginView" class="panel login-panel salon-auth-panel">
+        <div class="auth-brand">
+          <p class="auth-kicker">PERMANENT MAKEUP CONSENT</p>
+          <h2>BEYOND</h2>
+          <p class="auth-app-name">SALON APP</p>
+          <div class="ornament" aria-hidden="true"><span></span></div>
+        </div>
+        <div class="section-title auth-section-title">
+          <span class="auth-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" role="img">
+              <path d="M14 21v-5a10 10 0 0 1 20 0v5"></path>
+              <rect x="10" y="21" width="28" height="20" rx="4"></rect>
+              <path d="M24 29v6"></path>
+            </svg>
+          </span>
+          <div>
+            <h3>管理画面ログイン</h3>
+            <p>登録したメールアドレスとパスワードを入力してください。</p>
+          </div>
+        </div>
+        <form id="adminLoginForm" class="password-form">
+          <label>
+            メールアドレス
+            <input type="email" id="adminEmail" autocomplete="username" required placeholder="salon@example.com" />
+          </label>
+          <label>
+            パスワード
+            <input type="password" id="adminPassword" autocomplete="current-password" required placeholder="パスワードを入力" />
+          </label>
+          <button class="primary-button" type="submit">管理画面を開く</button>
+          <p class="form-message" id="loginMessage" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section id="adminApp" class="view">
+        <section class="panel admin-panel">
+          <div class="section-title">
+            <span>01</span>
+            <div>
+              <h2>同意書一覧</h2>
+              <p>保存された同意書を検索・PDF表示・印刷できます。</p>
+            </div>
+          </div>
+
+          <div class="filters">
+            <label>
+              お客様名で検索
+              <input type="search" id="searchName" placeholder="氏名またはフリガナ" />
+            </label>
+            <label>
+              電話番号で検索
+              <input type="search" id="searchPhone" placeholder="09012345678" />
+            </label>
+            <label>
+              施術日で絞り込み
+              <input type="date" id="filterTreatmentDate" />
+            </label>
+            <label>
+              施術部位で絞り込み
+              <select id="filterTreatmentPart">
+                <option value="">すべて</option>
+                <option value="眉">眉</option>
+                <option value="リップ">リップ</option>
+                <option value="アイライン">アイライン</option>
+                <option value="ヘアライン">ヘアライン</option>
+                <option value="SMP">SMP</option>
+                <option value="除去">除去</option>
+                <option value="カモフラージュ">カモフラージュ</option>
+                <option value="その他">その他</option>
+              </select>
+            </label>
+            <button class="secondary-button" id="clearFiltersButton" type="button">絞り込み解除</button>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>保存日時</th>
+                  <th>施術日</th>
+                  <th>お客様名</th>
+                  <th>電話番号</th>
+                  <th>施術部位</th>
+                  <th>署名日時</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="consentTableBody"></tbody>
+            </table>
+          </div>
+          <p class="empty-state" id="emptyState">保存された同意書はまだありません。</p>
+        </section>
+      </section>
+    </main>
+
+    <dialog id="detailDialog" class="detail-dialog">
+      <div class="dialog-header">
+        <h2>同意書詳細</h2>
+        <button class="icon-button" id="closeDialogButton" type="button" aria-label="閉じる">×</button>
+      </div>
+      <div id="detailContent" class="detail-content"></div>
+      <div class="dialog-actions">
+        <button class="primary-button" id="downloadPdfButton" type="button">PDFダウンロード</button>
+        <button class="secondary-button" id="printButton" type="button">印刷</button>
+        <button class="secondary-button danger" id="deleteButton" type="button">削除</button>
+      </div>
+    </dialog>
+
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="firebase-service.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
