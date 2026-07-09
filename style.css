@@ -2479,8 +2479,12 @@ body.auth-screen .salon-auth-panel {
   }
 
   .home-menu-button strong {
+    justify-self: start;
+    margin-left: 0;
+    padding-left: 0;
     font-size: clamp(20px, 5.2vw, 23px);
     line-height: 1.25;
+    text-align: left;
   }
 
   .home-menu-button small {
