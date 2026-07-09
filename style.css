@@ -2476,6 +2476,12 @@ body.auth-screen .salon-auth-panel {
   .menu-content {
     gap: 7px;
     align-self: center;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .home-menu-button.primary-menu .menu-content {
+    margin-left: -48px;
   }
 
   .home-menu-button strong {
@@ -2488,8 +2494,12 @@ body.auth-screen .salon-auth-panel {
   }
 
   .home-menu-button small {
+    justify-self: start;
+    margin-left: 0;
+    padding-left: 0;
     font-size: clamp(13px, 3.6vw, 15px);
     line-height: 1.62;
+    text-align: left;
   }
 
   .menu-arrow {
