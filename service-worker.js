@@ -1,4 +1,4 @@
-const CACHE_NAME = "beyond-customer-management-v25";
+const CACHE_NAME = "beyond-customer-management-v27";
 const APP_FILES = [
   "./",
   "./index.html",

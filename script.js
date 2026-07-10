@@ -48,6 +48,8 @@ const DEFAULT_SALON_NAME = "BEYOND";
 const LEGACY_SALON_NAMES = ["MB " + "ARTMAKE", "MB" + "アートメイク"];
 
 const treatmentParts = ["眉", "リップ", "アイライン", "ヘアライン", "SMP", "除去", "カモフラージュ", "その他"];
+const artmakeHistoryOptions = ["過去にアートメイク経験が有り", "アートメイク経験なし"];
+const signatureRequiredCheckNames = new Set(["finalConsents"]);
 
 const historyItems = [
   "妊娠中または授乳中ではありません",
@@ -190,7 +192,7 @@ function initCustomerPage() {
     submitButton.disabled = !unlocked || !hasSignature;
     signatureLock.textContent = unlocked
       ? "署名欄が有効です。枠内に署名してください。"
-      : "すべての必須チェックが完了すると署名欄が有効になります。";
+      : "アートメイク履歴、施術希望部位、同意チェックが完了すると署名欄が有効になります。";
   }
 
   function resetSignature() {
@@ -298,6 +300,16 @@ function initCustomerPage() {
   document.querySelectorAll('input[type="checkbox"]').forEach((input) => {
     input.addEventListener("change", updateSignatureLock);
   });
+  document.querySelectorAll("[data-artmake-history-option='true']").forEach((input) => {
+    input.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        document.querySelectorAll("[data-artmake-history-option='true']").forEach((option) => {
+          if (option !== event.target) option.checked = false;
+        });
+      }
+      updateSignatureLock();
+    });
+  });
   document.querySelectorAll('input[name="treatmentParts"]').forEach((input) => {
     input.addEventListener("change", updateTreatmentOtherField);
   });
@@ -313,7 +325,7 @@ function initCustomerPage() {
     event.preventDefault();
 
     if (!allRequiredChecksCompleted()) {
-      alert("必須チェックをすべて確認してください。");
+      alert("アートメイク履歴と同意チェックを確認してください。");
       return;
     }
 
@@ -1152,7 +1164,11 @@ function createCheckbox(containerId, items, name) {
     input.name = name;
     input.value = text;
     input.id = `${name}-${index}`;
-    input.dataset.requiredCheck = "true";
+    if (name === "history" && artmakeHistoryOptions.includes(text)) {
+      input.dataset.artmakeHistoryOption = "true";
+    } else if (signatureRequiredCheckNames.has(name)) {
+      input.dataset.requiredCheck = "true";
+    }
     labelText.textContent = text;
     container.appendChild(item);
   });
@@ -1178,7 +1194,9 @@ function getCheckedValues(name) {
 
 function allRequiredChecksCompleted() {
   const checks = Array.from(document.querySelectorAll("[data-required-check='true']"));
-  return checks.length > 0 && checks.every((input) => input.checked);
+  const artmakeHistoryChecks = Array.from(document.querySelectorAll("[data-artmake-history-option='true']"));
+  const artmakeHistoryCompleted = artmakeHistoryChecks.length === 0 || artmakeHistoryChecks.some((input) => input.checked);
+  return checks.length > 0 && checks.every((input) => input.checked) && artmakeHistoryCompleted;
 }
 
 function switchView(viewId) {
